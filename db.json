@@ -1,22 +1,14 @@
 {
   "books": [
-    {
-      "title": "All the letters I should Have Sent",
-      "author": "Rania Naim",
-      "topic": "Biography",
-      "year": "2020",
-      "created": "2023-11-22T20:31:46.480Z",
-      "img": "assets/images/book01.jpg",
-      "id": 1
-    },
+    
     {
       "title": "Out of the ruins",
       "author": "Tina Tran",
       "topic": "Psihology",
       "year": "2022",
-      "created": "2023-11-23T20:31:46.480Z",
-      "img": "assets/images/book02.jpg",
-      "id": 2
+      "created": "2023-11-22T20:31:46.480Z",
+      "img": "assets/images/book01.jpg",
+      "id": 1
     },
     {
       "title": "Women who don't give a f'ck",
@@ -24,8 +16,8 @@
       "topic": "Fiction",
       "year": "2023",
       "created": "2023-11-24T20:31:46.480Z",
-      "img": "assets/images/book05.jpg",
-      "id": 3
+      "img": "assets/images/book02.jpg",
+      "id": 2
     }
   ]
 }
