@@ -37,7 +37,6 @@ const getBook = (): void => {
 						<div class="book__input">${book.topic}</div>
 						<div class="book__input">${book.year}</div>
 						<div class="book-buttons">
-							<button class="crud__button js-edit-button" data-book-id="${book.id}">Edit</button>
 							<button class="crud__button js-delete-button" data-book-id="${book.id}">Delete</button>
 						</div>
 						<div class="book__timestamp">Created ${timestamp} ago</div>
