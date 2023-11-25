@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/src/assets/reset.css" type="text/html">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="/styles.css">
+    <title>MD 8</title>
+</head>
+<body>
+    <header>
+        <div class="crud__title">
+            CRUD
+        </div>
+        <form class="crud__form js-form">
+            <p class="crud__form-title">Add new book</p>
+            <div class="crud__form-inputs">
+                <input type="text" class="crud__form-input" name="title" placeholder="Title" required>
+                <input type="text" class="crud__form-input" name="author" placeholder="Author" required>
+                <input type="text" class="crud__form-input" name="topic" placeholder="Topic" required>
+                <input type="text" class="crud__form-input" name="year" placeholder="Year of publication" required>
+                <input type="text" class="crud__form-input" name="img" placeholder="Paste the address of the image" required>
+            </div>
+            <button class="crud__button js-add-button" href="">Add</button>
+        </form>
+    </header>
+
+    <section>
+    <div class="crud__cards js-cards">
+
+    </div>
+    </section>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="/scripts.js"></script>
+</body>
+</html>
