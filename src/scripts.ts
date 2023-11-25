@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { differenceInMinutes, differenceInHours, differenceInDays } from 'date-fns';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 // Norādam DOM elementu
 const cards = document.querySelector<HTMLDivElement>('.js-cards');
@@ -10,7 +10,7 @@ type Book = {
 	author: string;
 	topic: string;
 	year: number;
-	createdAt: string;
+	created: string;
 	img: string;
 	id: number;
 };
@@ -22,6 +22,9 @@ const getBook = (): void => {
 
   axios.get<Book[]>('http://localhost:3004/books').then((response) => { // READ
     response.data.forEach((book) => {
+
+			const timestamp = formatDistanceToNow(new Date(book.created)); // Izveidojam mainīgo, lai aprēķinās laiks no tagad līdz grāmatas saglabāšanai datu bāzē.
+
       cards.innerHTML += `
       <div class="books__wrapper">
 				<div class="book__wrapper">
@@ -37,7 +40,7 @@ const getBook = (): void => {
 							<button class="crud__button js-edit-button" data-book-id="${book.id}">Edit</button>
 							<button class="crud__button js-delete-button" data-book-id="${book.id}">Delete</button>
 						</div>
-						<div class="book__timestamp"></div>
+						<div class="book__timestamp">Created ${timestamp} ago</div>
 					</div>
 				</div>
 			</div>
@@ -56,7 +59,7 @@ const form = document.querySelector<HTMLFormElement>('.js-form');
 	form.addEventListener('submit', (event) => {
 		event.preventDefault();
 
-		const formData = new FormData(form);
+		const formData = new FormData(form); // Ļauj  izvilkt katu HTML elementa vērtību. Nav jātaisa mainīgie blablabla.value
 		const title = formData.get('title');
 		const author = formData.get('author');
 		const topic = formData.get('topic');
@@ -68,10 +71,11 @@ const form = document.querySelector<HTMLFormElement>('.js-form');
       "author": author,
       "topic": topic,
       "year": year,
+			"img": img,
       "created": new Date(),
-      "img": img,
 		}).then(() => {
-			form.reset(); // Notīram visu, lai pirms tam esošās grāmatas nedublējas
+			form.reset(); // Notīram visu, lai pirms tam esošās grāmatas nedublējas. Šis īsais pieraksts ir iespējams pateicoties tam, ka HTML'ā noformēts kā <form></form>
+
 			getBook(); // Izsaucam funkciju, t.i. parādam visas šobrīd datu bāzē esošās grāmatas
 
 			// Veidojam Tostify, lai parādās ziņa,kas apliecina grāmatas radīšanu. Sk.zemāk:
