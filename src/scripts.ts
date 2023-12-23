@@ -20,12 +20,13 @@ type Book = {
 const getBook = (): void => {
 	cards.innerHTML = '';
 
-  axios.get<Book[]>('http://localhost:3004/books').then((response) => { // READ
-    response.data.forEach((book) => {
+  axios.get<Book[]>('http://localhost:3004/books').then((response) => { // READ. Paņemam datus no servera.
+    response.data.forEach((book) => { // Iterējam cauri katrai grāmatai (ko saņemam no servera) ...
 
-			const timestamp = formatDistanceToNow(new Date(book.created)); // Izveidojam mainīgo, lai aprēķinās laiks no tagad līdz grāmatas saglabāšanai datu bāzē.
+			const timestamp = formatDistanceToNow(new Date(book.created)); // ... izveidojam mainīgo, lai aprēķinās laiks no tagad līdz grāmatas saglabāšanai datu bāzē.
 
-      cards.innerHTML += `
+      // ... izveidojam HTML elementus katrai grāmatai, ievietojot tur attiecīgas grāmatas elementus
+			cards.innerHTML += `
       <div class="books__wrapper">
 				<div class="book__wrapper">
 					<div class="book__img-wrapper" width="500" height="333">
@@ -45,10 +46,10 @@ const getBook = (): void => {
 			</div>
     `;
     });
-    addDeleteToBooks();
+    addDeleteToBooks(); // Pēc grāmatu renderēšanas tiek izsaukta funkcija, kas pievieno dzēšanas funkciju pogai Delete.
   });
 };
-getBook(); //Izsaucam funkciju
+getBook(); //Izsaucam pašu funkciju
 
 
 
@@ -58,14 +59,14 @@ const form = document.querySelector<HTMLFormElement>('.js-form');
 	form.addEventListener('submit', (event) => {
 		event.preventDefault();
 
-		const formData = new FormData(form); // Ļauj  izvilkt katu HTML elementa vērtību. Nav jātaisa mainīgie blablabla.value
-		const title = formData.get('title');
+		const formData = new FormData(form); // FormData objekts nodrošina veidu, kā viegli izveidot key-value pāru kopu. Šajā gadījumā to izmanto, lai tvertu datus, kas iesniegti, izmantojot HTML formu (const form 57.rindiņā). Vispār FormData ir viens no daudzajiem API interfeisiem jeb objektu tipiem. https://developer.mozilla.org/en-US/docs/Web/API
+		const title = formData.get('title'); // formData.get() metode ļauj iegūt konkrētu formas elementa vērtību (kādu no 22-26.rindiņas HTML failā, līdz kuram, savukārt tiekam caur to pašu const form, kas definēta te 57.rindā). Šajā gadījumā tas ir input lauka title vērtība. Citas metodes skat. https://developer.mozilla.org/en-US/docs/Web/API/FormData
 		const author = formData.get('author');
 		const topic = formData.get('topic');
 		const year = formData.get('year');
 		const img = formData.get('img');
 
-		axios.post('http://localhost:3004/books', { // Radam ierakstu datu bāzē ar post jeb C (Create no CRUD)
+		axios.post('http://localhost:3004/books', { // Radam ierakstu datu bāzē ar post jeb C (Create no CRUD). Sūtam uz DB tos datus, ko ieguvām no formas inputiem ar FormData() un formData.get() palīdzību (skat.62.-67.rinu)
 			"title": title,
       "author": author,
       "topic": topic,
